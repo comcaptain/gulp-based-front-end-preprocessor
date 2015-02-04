@@ -146,7 +146,7 @@ function updateTags(html, mode, map, convertResourceUrlToAbsolutePath, convertAb
 				newHtml += '<script type="text/javascript" src="' + newResourceUrl + '"></script>';
 			}
 			else {
-				newHtml += '<link type="text/css" rel="stylesheet" src="' + newResourceUrl + '" />';
+				newHtml += '<link type="text/css" rel="stylesheet" href="' + newResourceUrl + '" />';
 			}
 			usedTargetFiles[targetUrl] = 1;
 		}

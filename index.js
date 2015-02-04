@@ -203,7 +203,7 @@ function minify() {
 			this.queue(file);
 		});
 		if (file.path.match(/\.js$/)) {
-			minifyStream.pipe(es.through(function(file) {
+			minifyStream.pipe(uglify()).pipe(es.through(function(file) {
 				callback(null, file);
 			}));
 		}

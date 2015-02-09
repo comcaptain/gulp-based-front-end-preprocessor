@@ -1,5 +1,8 @@
 # gulp-based-front-end-preprocessor
 
+## Install
+`npm install gulp-based-front-end-preprocessor`
+
 ##This preprocessor does the following work:
 
 1. concat files according to packages config

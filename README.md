@@ -10,7 +10,7 @@
 4. update references in corresponding html-like files(developed for html and jsp, but should be OK on other html-like files)
 
 ##Remarks
-In config, the `css_js_files` and `html_like_files` are glob strings, you can reference (https://github.com/wearefractal/vinyl-fs)[vinyl-fs] for detail.
+In config, the `css_js_files` and `html_like_files` are glob strings, you can reference [vinyl-fs](https://github.com/wearefractal/vinyl-fs) for detail.
 
 ##Example
 ```

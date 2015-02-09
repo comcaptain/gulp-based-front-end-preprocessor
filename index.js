@@ -216,13 +216,28 @@ function minify() {
 	});
 	return stream;
 }
+function getOtherFiles(filePaths) {
+	var otherFiles = ["**/*"];
+	for (var i = 0; i < filePaths.length; i++) {
+		var filePath = filePaths[i];
+		if (filePath.match(/^!/)) {
+			otherFiles.push(filePaths[i].substring(1));
+		}
+		else {
+			otherFiles.push("!" + filePaths[i]);
+		}
+	}
+	return otherFiles;
+}
 module.exports = {
 	execute: function(config) {
-		return gulp.src(config.css_js_files, {cwd: config.source_dir})
+		gulp.src(config.css_js_files, {cwd: config.source_dir})
 			.pipe(packageFiles(config.packages))
 			.pipe(minify())
 			.pipe(hash())
 			.pipe(updateReferences(gulp.src(config.html_like_files, {cwd: config.source_dir}), config))
+			.pipe(gulp.dest(config.output_dir));
+		gulp.src(getOtherFiles([].concat(config.css_js_files).concat(config.html_like_files)), {cwd: config.source_dir})
 			.pipe(gulp.dest(config.output_dir));
 	},
 	packageFiles: packageFiles,

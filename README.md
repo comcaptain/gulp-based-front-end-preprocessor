@@ -9,6 +9,9 @@
 3. add hash postfix to js/css file names
 4. update references in corresponding html-like files(developed for html and jsp, but should be OK on other html-like files)
 
+##Remarks
+In config, the `css_js_files` and `html_like_files` are glob strings, you can reference (https://github.com/wearefractal/vinyl-fs)[vinyl-fs] for detail.
+
 ##Example
 ```
 var processor = require("gulp-based-front-end-preprocessor");
@@ -60,3 +63,5 @@ var config = {
 }
 processor.execute(config);
 ```
+**Version 1.0.2**
+Now files not processed will also be copied to destination folder

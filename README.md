@@ -1,7 +1,5 @@
 # gulp-based-front-end-preprocessor
 
-**Attention: this preprocessor has not been fully tested yet**
-
 ##This preprocessor does the following work:
 
 1. concat files according to packages config

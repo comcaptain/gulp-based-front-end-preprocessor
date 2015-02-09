@@ -121,7 +121,7 @@ function packageFiles(packageConfig) {
 	});
 	return stream;
 }
-function updateTags(html, mode, map, convertResourceUrlToAbsolutePath, convertAbsolutePathToResourceUrl) {
+function updateTags(html, mode, map, convertReferenceUrlToRelativePath, convertRelativePathToReferenceUrl) {
 	var tags;
 	var usedTargetFiles = {};
 	if (mode == "js") {
@@ -136,12 +136,12 @@ function updateTags(html, mode, map, convertResourceUrlToAbsolutePath, convertAb
 	for (var i = 0; i < tags.length; i++) {
 		var startIndex = tags[i][1];
 		var endIndex = tags[i][2];
-		var originalUrl = convertResourceUrlToAbsolutePath(tags[i][0]);
+		var originalUrl = convertReferenceUrlToRelativePath(tags[i][0]);
 		var targetUrl = map[originalUrl];
 		newHtml += html.substring(lastIndex, startIndex);
 		if (usedTargetFiles[targetUrl] == undefined) {
 			newHtml += tags[i][3];
-			var newResourceUrl = convertAbsolutePathToResourceUrl(targetUrl);
+			var newResourceUrl = convertRelativePathToReferenceUrl(targetUrl);
 			if (newResourceUrl.match(/\.js$/)) {
 				newHtml += '<script type="text/javascript" src="' + newResourceUrl + '"></script>';
 			}
@@ -187,9 +187,9 @@ function updateReferences(targetFiles, options) {
 			}
 			var html = htmlLikeFile.contents.toString();
 			var newHtml = updateTags(html, "css", map, 
-					options.convertResourceUrlToAbsolutePath, options.convertAbsolutePathToResourceUrl);
+					options.convertReferenceUrlToRelativePath, options.convertRelativePathToReferenceUrl);
 			newHtml = updateTags(newHtml, "js", map, 
-					options.convertResourceUrlToAbsolutePath, options.convertAbsolutePathToResourceUrl);
+					options.convertReferenceUrlToRelativePath, options.convertRelativePathToReferenceUrl);
 			htmlLikeFile.contents = new Buffer(newHtml);
 			callback(null, htmlLikeFile);
 		}))

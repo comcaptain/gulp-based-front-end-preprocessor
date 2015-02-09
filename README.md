@@ -15,7 +15,7 @@ In config, the `css_js_files` and `html_like_files` are glob strings, you can re
 ##Example
 ```
 var processor = require("gulp-based-front-end-preprocessor");
-//all these configurations are required, no one can be ignored
+//all these configuration properties are required, no one can be ignored
 var config = {
 	packages: {
 		"test/jsp/test.jsp": {

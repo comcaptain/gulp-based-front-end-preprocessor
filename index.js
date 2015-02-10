@@ -230,7 +230,21 @@ function getOtherFiles(filePaths) {
 	}
 	return otherFiles;
 }
+function checkConfig(inputConfig) {
+	var message = "";
+	for (var i = 0; i < requiredOptions.length; i++) {
+		var requiredOption = requiredOptions[i];
+		if (inputConfig[requiredOption] == undefined) {
+			message += requiredOption + ","
+		}
+	}
+	if (message.length == 0) return true;
+	console.error("Options [" + message.substring(0, message.length - 1) + "] are required.");
+	return false;
+}
+var requiredOptions = ["source_dir", "output_dir"];
 var defaultConfig = {
+	packages: {},
 	css_js_files: ["**/*.js", "**/*.css"],
 	html_like_files: ["**/*.jsp", "**/*.html"],
 	convertRelativePathToReferenceUrl: function(absolutePath) {
@@ -244,6 +258,7 @@ var defaultConfig = {
 var config = {};
 module.exports = {
 	execute: function(inputConfig) {
+		if (!checkConfig(inputConfig)) return false;
 		config = extend(true, defaultConfig, inputConfig);
 		gulp.src(config.css_js_files, {cwd: config.source_dir})
 			.pipe(packageFiles(config.packages))

@@ -3,7 +3,7 @@
 ## Install
 `npm install gulp-based-front-end-preprocessor`
 
-##This preprocessor does the following work:##
+## This preprocessor does the following work: ##
 
 1. concat files according to packages config
 2. minify js and css files
@@ -11,13 +11,13 @@
 4. update references in corresponding html-like files(developed for html and jsp, but should be OK on other html-like files)
 5. copy all but jsp/html files from source_dir to output_dir
 
-##API##
+## API ##
 **NOTICE:** All file paths mentioned below are paths relative to source_dir
-####source_dir(required)####
+#### source_dir(required) ####
 The directory of source files
-####output_dir(required)####
+#### output_dir(required) ####
 The output directory
-####packages(optional)####
+#### packages(optional) ####
 default is `{}`, this object is organized as below:
 - first level is html-like file path
 - second level is concated js/css file path
@@ -56,22 +56,22 @@ Example
 	}
 }
 ```
-####requireTypeAttributeInJsTag(optional)####
+#### requireTypeAttributeInJsTag(optional) ####
 Default is false. If set to true, only script tags with `type="text/javascript"` attribute will be considered as legal, tags like`<script src="path/to/js/file"></script>` will be be ignored
 
-####css_js_files(optional)####
+#### css_js_files(optional) ####
 Glob strings of to be processed js/css files. Default is `["**/*.js", "**/*.css"]`. About Glob string, you can reference [vinyl-fs](https://github.com/wearefractal/vinyl-fs) for detail.
 
-####html_like_files(optional)####
+#### html_like_files(optional) ####
 Glob strings of to be processed html-like files. Default is `["**/*.jsp", "**/*.html"]`. About Glob string, you can reference [vinyl-fs](https://github.com/wearefractal/vinyl-fs) for detail.
 
-####convertRelativePathToReferenceUrl(optional)####
+#### convertRelativePathToReferenceUrl(optional) ####
 Default is `function(str) {return str;}`. If path of js/css file is "test/js/test.js" while the reference url in html-like file is `<script type="text/javascript" src="./test/js/test.js"></script>`, then you can set convertRelativePathToReferenceUrl to:
 `function(relativePath) { return "./" + relativePath;}`.
 
 **NOTICE:** convertRelativePathToReferenceUrl and convertReferenceUrlToRelativePath should appear in pairs
 
-####convertReferenceUrlToRelativePath(optional)####
+#### convertReferenceUrlToRelativePath(optional) ####
 Default is `function(str) {return str;}`. 
 
 If path of js/css file is "test/js/test.js" while the reference url in html-like file is `<script type="text/javascript" src="./test/js/test.js"></script>`, then you can set convertRelativePathToReferenceUrl to:
@@ -79,7 +79,7 @@ If path of js/css file is "test/js/test.js" while the reference url in html-like
 
 **NOTICE:** convertRelativePathToReferenceUrl and convertReferenceUrlToRelativePath should appear in pairs
 
-##Simple Example##
+## Simple Example ##
 ```
 var processor = require("gulp-based-front-end-preprocessor");
 var config = {
@@ -94,7 +94,7 @@ The code above will do the following work:
 3. update references in corresponding jsp/html files
 4. copy all but jsp/html files from source_dir to output_dir
 
-##Full Featured Example##
+## Full Featured Example ##
 ```
 var processor = require("gulp-based-front-end-preprocessor");
 var config = {

@@ -24,7 +24,8 @@ function getScriptTags(html) {
 	var match = undefined;
 	while (match = regex.exec(html)) {
 		var scriptTagString = match[0].replace(/[\s\n\r]+/g, " ");
-		if (!scriptTagString.match(/type=("text\/javascript"|'text\/javascript'|text\/javascript)/)) continue;
+		if (config.requireTypeAttributeInJsTag 
+			&& !scriptTagString.match(/type=("text\/javascript"|'text\/javascript'|text\/javascript)/)) continue;
 		tags.push([match[2], match.index, regex.lastIndex, match[1]]);
 	}
 	return tags;
@@ -229,15 +230,28 @@ function getOtherFiles(filePaths) {
 	}
 	return otherFiles;
 }
+var defaultConfig = {
+	css_js_files: ["**/*.js", "**/*.css"],
+	html_like_files: ["**/*.jsp", "**/*.html"],
+	convertRelativePathToReferenceUrl: function(absolutePath) {
+		return absolutePath;
+	},
+	convertReferenceUrlToRelativePath: function(resourceUrl) {
+		return resourceUrl;
+	},
+	requireTypeAttributeInJsTag: false
+}
+var config = {};
 module.exports = {
-	execute: function(config) {
+	execute: function(inputConfig) {
+		config = extend(true, defaultConfig, inputConfig);
 		gulp.src(config.css_js_files, {cwd: config.source_dir})
 			.pipe(packageFiles(config.packages))
 			.pipe(minify())
 			.pipe(hash())
 			.pipe(updateReferences(gulp.src(config.html_like_files, {cwd: config.source_dir}), config))
 			.pipe(gulp.dest(config.output_dir));
-		gulp.src(getOtherFiles([].concat(config.css_js_files).concat(config.html_like_files)), {cwd: config.source_dir})
+		gulp.src(getOtherFiles([].concat(config.html_like_files)), {cwd: config.source_dir})
 			.pipe(gulp.dest(config.output_dir));
 	},
 	packageFiles: packageFiles,

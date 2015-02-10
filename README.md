@@ -1,18 +1,18 @@
-# gulp-based-front-end-preprocessor
+# gulp-based-front-end-preprocessor #
 
 **Attention: this preprocessor has not been fully tested yet**
 
-##This preprocessor does the following work:
+##This preprocessor does the following work:##
 
 1. concat files according to packages config
 2. minify js and css files
 3. add hash postfix to js/css file names
 4. update references in corresponding html-like files(developed for html and jsp, but should be OK on other html-like files)
 
-##Remarks
+##Remarks##
 In config, the `css_js_files` and `html_like_files` are glob strings, you can reference (https://github.com/wearefractal/vinyl-fs)[vinyl-fs] for detail.
 
-##Example
+##Example##
 ```
 var processor = require("gulp-based-front-end-preprocessor");
 //all these configurations are required, no one can be ignored

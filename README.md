@@ -1,6 +1,7 @@
 # gulp-based-front-end-preprocessor #
 
-**Attention: this preprocessor has not been fully tested yet**
+## Install
+`npm install gulp-based-front-end-preprocessor`
 
 ##This preprocessor does the following work:##
 
@@ -10,12 +11,12 @@
 4. update references in corresponding html-like files(developed for html and jsp, but should be OK on other html-like files)
 
 ##Remarks##
-In config, the `css_js_files` and `html_like_files` are glob strings, you can reference (https://github.com/wearefractal/vinyl-fs)[vinyl-fs] for detail.
+In config, the `css_js_files` and `html_like_files` are glob strings, you can reference [vinyl-fs](https://github.com/wearefractal/vinyl-fs) for detail.
 
 ##Example##
 ```
 var processor = require("gulp-based-front-end-preprocessor");
-//all these configurations are required, no one can be ignored
+//all these configuration properties are required, no one can be ignored
 var config = {
 	packages: {
 		"test/jsp/test.jsp": {

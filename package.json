@@ -1,6 +1,6 @@
 {
   "name": "gulp-based-front-end-preprocessor",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "used to package,minify and hash css/js file",
   "main": "index.js",
   "scripts": {

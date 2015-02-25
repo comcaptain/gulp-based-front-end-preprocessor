@@ -1,6 +1,9 @@
 # gulp-based-front-end-preprocessor #
 
-## Install
+
+***You can submit bugs [here](https://github.com/comcaptain/gulp-based-front-end-preprocessor/issues)***
+
+## Install ##
 `npm install gulp-based-front-end-preprocessor`
 
 ## This preprocessor does the following work: ##
@@ -88,7 +91,8 @@ var config = {
 }
 processor.execute(config);
 ```
-The code above will do the following work:
+The code above does the following work:
+
 1. minify js and css files
 2. add hash postfix to js/css file names
 3. update references in corresponding jsp/html files

@@ -34,7 +34,7 @@ function getScriptTags(html) {
 function getCssLinkTags(html) {
 	var tags = [];
 	if (!html || html.length == 0) return tags;
-	var regex = /\n?(\s*)<link\s[^>]*href=["']?([^"'>]*)["']?[^>]*\/>/g;
+	var regex = /\n?(\s*)<link\s[^>]*href=["']?([^"'>]*)["']?[^>]*\/?>/g;
 	var match = undefined;
 	while (match = regex.exec(html)) {
 		var linkTagString = match[0].replace(/[\s\n\r]+/g, " ");
@@ -90,7 +90,6 @@ function packageFiles(packageConfig) {
 	var stream = es.through(function(file) {
 		var partPath = getRelativePath(file);
 		var packageFiles = reverseMap[partPath];
-		// console.log(reverseMap);
 		if (packageFiles) {
 			for (var i = 0; i < packageFiles.length; i++) {
 				var packageFilePath = packageFiles[i][0];
@@ -167,11 +166,10 @@ function updateReferences(targetFiles, options) {
 	var packageMap = {};
 	var stream = es.map(function(resourceFile, callback) {
 		if (resourceFile.parts) {
-			var reverseMap = {};
-			for (var packageFile in resourceFile.parts) {
-				reverseMap[resourceFile.parts[packageFile]] = getRelativePath(resourceFile);
+			if (packageMap[resourceFile.htmlLikeFilePath] == undefined) packageMap[resourceFile.htmlLikeFilePath] = {};
+			for (var i in resourceFile.parts) {
+				packageMap[resourceFile.htmlLikeFilePath][resourceFile.parts[i]] = getRelativePath(resourceFile);
 			}
-			packageMap[resourceFile.htmlLikeFilePath] = reverseMap;
 		}
 		else {
 			var originalFilePath = getRelativeFolder(resourceFile) + "/" + resourceFile.origFilename;

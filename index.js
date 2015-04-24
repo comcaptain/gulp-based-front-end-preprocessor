@@ -138,6 +138,7 @@ function updateTags(html, mode, map, convertReferenceUrlToRelativePath, convertR
 		var endIndex = tags[i][2];
 		var originalUrl = convertReferenceUrlToRelativePath(tags[i][0]);
 		var targetUrl = map[originalUrl];
+		if (targetUrl == undefined) continue;
 		newHtml += html.substring(lastIndex, startIndex);
 		if (usedTargetFiles[targetUrl] == undefined) {
 			newHtml += tags[i][3];
@@ -246,10 +247,10 @@ var defaultConfig = {
 	css_js_files: ["**/*.js", "**/*.css"],
 	html_like_files: ["**/*.jsp", "**/*.html"],
 	convertRelativePathToReferenceUrl: function(absolutePath) {
-		return absolutePath;
+		return absolutePath == undefined ? "" : absolutePath;
 	},
 	convertReferenceUrlToRelativePath: function(resourceUrl) {
-		return resourceUrl;
+		return resourceUrl == undefined ? "" : resourceUrl;
 	},
 	requireTypeAttributeInJsTag: false
 }
